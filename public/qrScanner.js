@@ -1,10 +1,8 @@
 function startQRScanning() {
 
-
-navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }) // 'environment' to use the rear camera if available
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }) // 'environment' to use the rear camera if available
   .then(function(stream) {
-    let video = document.createElement("video");
-    document.body.appendChild(video);
+    let video = document.getElementById("video");  // TARGET THE MODAL VIDEO ELEMENT
     video.srcObject = stream;
     video.setAttribute("playsinline", true); // required for iPhones
     video.play();
@@ -33,7 +31,7 @@ navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }) //
       requestAnimationFrame(tick);
     }
   })
-  .catch(function(err) {
-    console.error("Camera access error:", err);
-  });
+
+
+ 
 }

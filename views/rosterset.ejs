@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="manifest" href="/manifest.json">
+
+    <title>Roster</title>
+
+    <style>
+      ul {
+        list-style: none;
+      }
+    
+      
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+
+  .myLink {
+    color: black;
+    text-decoration: none;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+</style>
+  
+<link rel="manifest" href="manifest.json" /> 
+<meta name="theme-color" content="#008B8B">
+</head>
+  
+<header>
+    
+    
+     <nav class="navbar">
+     
+        <div class="container-fluid">
+          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item text-white">
+                
+                    <form action="/" method="get">
+                      <button type="submit" class="nav-link btn btn-link text-white">Home</button>
+                    </form>
+                  </li>
+
+              
+              <li class="nav-item">
+                <form action="/rosterset" method="get">
+                  <button type="submit" class="nav-link btn btn-link text-white">Roster</button>
+                </form>
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+      </nav> 
+    
+</header>
+<body class="bg-dark">
+  <h2 class="text-center text-white">Clinical Technologist Roster</h2>
+
+
+    <div class="container">
+<br>
+  <% rosters.forEach(function(roster) { %>
+    <div class="col-sm-12 col-md-6">
+        <div class="card mb-2" >
+            <div class="card-body">
+                <h6 class="card-title"><%= roster.description %></h6>
+                <p><%= roster.staff %></p>
+                <form action="/rosterchange" method="POST">
+                    <input type="hidden" name="description" value="<%= roster.description %>">
+                    <input type="hidden" name="staff" value="<%= roster.staff %>">
+                    <button type="submit" class="btn btn-primary">Change</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+<% }); %>
+
+
+
+
+
+
+
+          
+                
+        
+        
+        
+            
+
+
+
+</div>
+
+<p class="text-white">WORKING HOURS:</p>
+  <p class="text-white small-text">07h00- 15h00 full staff component (Monday to Friday)</p>
+  <p class="text-white small-text">15h00-20h00 overtime on site 1 x Clin Tech (Monday to Friday)</p>
+  <p class="text-white small-text">08h00-13h00 Saturdays on site 1 x Clin Tech
+  <p class="text-white small-text">09h00-13h00 Sundays and Public Holidays on site 1 x Clin Tech</p>
+  <p class="text-white small-text">All hours Speed dial 3006</p>
+                  
+                  
+              
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+    .then(function(registration) {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch(function(error) {
+      console.error('Service Worker registration failed:', error);
+    });
+  }
+  </script>
+
+</body>
+</html>

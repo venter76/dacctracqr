@@ -1,8 +1,11 @@
 function startQRScanning() {
 
+
+  let video = document.getElementById("video");
+
   navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }) // 'environment' to use the rear camera if available
   .then(function(stream) {
-    let video = document.getElementById("video");  // TARGET THE MODAL VIDEO ELEMENT
+    // let video = document.getElementById("video");  // TARGET THE MODAL VIDEO ELEMENT
     video.srcObject = stream;
     video.setAttribute("playsinline", true); // required for iPhones
     video.play();

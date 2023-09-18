@@ -23,6 +23,35 @@
     text-decoration: none;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 60%;
+    background-color: #fff;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 
 
@@ -85,6 +114,13 @@
     </div>
     <br>
 
+<!-- Add this somewhere in your HTML -->
+<div id="cameraModal" class="modal">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <video id="video" width="500" height="500"></video>
+  </div>
+</div>
 
  
 <br>
@@ -149,8 +185,30 @@
 
 
         <script>
-        document.getElementById('startScan').addEventListener('click', startQRScanning);
-</script>
+          var modal = document.getElementById("cameraModal");
+          var btn = document.getElementById("startScan");
+          var span = document.getElementsByClassName("close")[0];
+      
+          btn.onclick = function() {
+              modal.style.display = "block";
+              // Assuming startQRScanning is your function in qrScanner.js that initiates the QR scanning
+              startQRScanning();
+          }
+      
+          span.onclick = function() {
+              modal.style.display = "none";
+              // Optionally, stop your QR scanning code here, if you have a function to do that.
+              // For example: stopQRScanning();
+          }
+      
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+                  // Optionally, stop your QR scanning code here.
+                  // For example: stopQRScanning();
+              }
+          }
+      </script>
      
 
 </body>

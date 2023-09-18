@@ -94,6 +94,9 @@
       <div class="p-3 mb-2 text-black rounded-pill pill-box bg-<%= itemColours[index] %>">
           <div class="pill-box-content text-center">
               <a class="myLink" href="/detail?itemName=<%= encodeURIComponent(itemName) %>"><%= itemName %></a>
+              <button id="startScan">Scan QR Code</button>
+
+              
               <!-- <h7><%= itemName %></h7> -->
           </div>
       </div>
@@ -143,6 +146,11 @@
         <script src="https://cdn.jsdelivr.net/npm/jsqr@1.3.1/dist/jsQR.js"></script>
 
         <script src="/qrScanner.js"></script>
+
+
+        <script>
+        document.getElementById('startScan').addEventListener('click', startQRScanning);
+</script>
      
 
 </body>

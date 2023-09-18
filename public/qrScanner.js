@@ -1,3 +1,6 @@
+function startQRScanning() {
+
+
 navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }) // 'environment' to use the rear camera if available
   .then(function(stream) {
     let video = document.createElement("video");
@@ -23,7 +26,7 @@ navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }) //
         
         if (code) {
           console.log("Found QR code:", code.data);
-          // Handle the scanned data here...
+          // More code ....
         }
       }
       
@@ -33,3 +36,4 @@ navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }) //
   .catch(function(err) {
     console.error("Camera access error:", err);
   });
+}

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'static-cache-v1';
+const CACHE_NAME = 'static-cache-v3';
 const STATIC_ASSETS = [
     '/iconLarge_1.png',
     '/iconLarge_2.png',

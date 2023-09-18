@@ -27,6 +27,7 @@ function startQRScanning() {
         
         if (code) {
           console.log("Found QR code:", code.data);
+          window.location.href = `/detail?itemName=${code.data}`;
           // More code ....
         }
       }

@@ -109,6 +109,7 @@
       <div class="col-md-2 col-2 d-flex align-items-center justify-content-end">
         <form action="/" method="get">
           <button type="submit" class="btn btn-outline-secondary">Refresh</button>
+          <button id="startScan">Scan QR Code</button>
         </form>
       </div>
     </div>
@@ -130,7 +131,7 @@
       <div class="p-3 mb-2 text-black rounded-pill pill-box bg-<%= itemColours[index] %>">
           <div class="pill-box-content text-center">
               <a class="myLink" href="/detail?itemName=<%= encodeURIComponent(itemName) %>"><%= itemName %></a>
-              <button id="startScan">Scan QR Code</button>
+             
 
               
               <!-- <h7><%= itemName %></h7> -->

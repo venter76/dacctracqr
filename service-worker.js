@@ -1,4 +1,4 @@
-const CACHE_NAME = 'static-cache-v8';
+const CACHE_NAME = 'static-cache-v9';
 const STATIC_ASSETS = [
     'placeholder.html',
     '/iconLarge_1.png',
@@ -9,12 +9,14 @@ const STATIC_ASSETS = [
     '/NXRX.gif',
     '/penguin.gif',
     '/cat.gif',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
    
     // ... other static assets
 ];
 
 
 self.addEventListener('install', (event) => {
+    self.skipWaiting();  // Add this line
     event.waitUntil(
 
         caches.open(CACHE_NAME).then(cache => {

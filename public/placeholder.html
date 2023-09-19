@@ -17,5 +17,32 @@
 </head>
 <body>
     <h3>"Finding your equipment ..."</h3>
+
+
+    <script>
+        function checkOnlineStatus() {
+          if (navigator.onLine) {
+            // If the browser thinks we are online, let's double-check
+            fetch('/connectivity-check', { 
+              method: 'HEAD',
+              cache: 'no-store'
+            })
+            .then(response => {
+              if (response.ok) {
+                // We got a valid response, reload the page
+                window.location.reload();
+              }
+            })
+            .catch(error => {
+              // Fetch failed, probably still offline
+            });
+          }
+        }
+      
+        // Poll every 10 seconds
+        setInterval(checkOnlineStatus, 3000);
+      </script>
+      
+
 </body>
 </html>

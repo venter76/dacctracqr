@@ -1,6 +1,6 @@
 const CACHE_NAME = 'static-cache-v4';
 const STATIC_ASSETS = [
-    'placeholder.ejs',
+    'placeholder.html',
     '/iconLarge_1.png',
     '/iconLarge_2.png',
     '/iconLarge_3.png',
@@ -41,7 +41,7 @@ self.addEventListener('fetch', (event) => {
             fetch(event.request).catch(() => {
                 // Return placeholder.html if the app is offline and the request is for the homepage
                 if (event.request.url.includes('/')) {
-                    return caches.match('/placeholder.ejs');
+                    return caches.match('/placeholder.html');
                 }
 
             // caches.match(event.request).then((response) => {

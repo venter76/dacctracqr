@@ -16,11 +16,28 @@ const STATIC_ASSETS = [
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(STATIC_ASSETS);
+
+        caches.open(CACHE_NAME).then(cache => {
+            STATIC_ASSETS.forEach(asset => {
+                cache.add(asset).catch(error => {
+                    console.error(`Failed to cache asset: ${asset}`, error);
+                });
+            });
         })
     );
 });
+
+
+
+
+
+
+
+//         caches.open(CACHE_NAME).then((cache) => {
+//             return cache.addAll(STATIC_ASSETS);
+//         })
+//     );
+// });
 
 
 

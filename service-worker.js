@@ -4,7 +4,7 @@ const STATIC_ASSETS = [
     '/iconLarge_1.png',
     '/iconLarge_2.png',
     '/iconLarge_3.png',
-    '/iconLarge.png',
+    
     '/MrF.gif',
     '/NXRX.gif',
     '/penguin.gif',

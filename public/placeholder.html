@@ -18,8 +18,23 @@
 <body>
     <h3>"Finding your equipment ..."</h3>
 
-
     <script>
+        function checkOnlineStatus() {
+            fetch('/checkOnline')
+                .then(response => {
+                    if (response.status === 200) {
+                        window.location.href = '/';  // Redirect to the home page
+                    }
+                })
+                .catch(error => {
+                    // Fetch failed, probably due to being offline. No action needed.
+                });
+        }
+
+        // Call the function every 5 seconds
+        setInterval(checkOnlineStatus, 1000);
+    </script>
+    <!-- <script>
         function checkOnlineStatus() {
           if (navigator.onLine) {
             // If the browser thinks we are online, let's double-check
@@ -52,7 +67,7 @@
     window.addEventListener('offline', () => {
         // Handle offline logic if needed
     });
-</script>
+</script> -->
       
 
 </body>

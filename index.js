@@ -102,11 +102,14 @@ const connectDB = async () => {
 
 
 
+  app.get('/checkOnline', (req, res) => {
+    res.status(200).send('Online');
+});
 
 
-  app.head('/connectivity-check', (req, res) => {
-    res.status(200).end();
-  });
+  // app.head('/connectivity-check', (req, res) => {
+  //   res.status(200).end();
+  // });
   
 
   

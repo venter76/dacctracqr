@@ -40,8 +40,19 @@
         }
       
         // Poll every 10 seconds
-        setInterval(checkOnlineStatus, 3000);
+        setInterval(checkOnlineStatus, 2000);
       </script>
+
+<script>
+    window.addEventListener('online', () => {
+        // Browser thinks we're back online, reload the page
+        window.location.reload();
+    });
+
+    window.addEventListener('offline', () => {
+        // Handle offline logic if needed
+    });
+</script>
       
 
 </body>

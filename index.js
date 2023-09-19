@@ -107,10 +107,7 @@ const connectDB = async () => {
 });
 
 
-  // app.head('/connectivity-check', (req, res) => {
-  //   res.status(200).end();
-  // });
-  
+ 
 
   
   

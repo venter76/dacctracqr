@@ -34,41 +34,7 @@
         // Call the function every 5 seconds
         setInterval(checkOnlineStatus, 1000);
     </script>
-    <!-- <script>
-        function checkOnlineStatus() {
-          if (navigator.onLine) {
-            // If the browser thinks we are online, let's double-check
-            fetch('/connectivity-check', { 
-              method: 'HEAD',
-              cache: 'no-store'
-            })
-            .then(response => {
-              if (response.ok) {
-                // We got a valid response, reload the page
-                window.location.reload();
-              }
-            })
-            .catch(error => {
-              // Fetch failed, probably still offline
-            });
-          }
-        }
-      
-        // Poll every 10 seconds
-        setInterval(checkOnlineStatus, 2000);
-      </script>
-
-<script>
-    window.addEventListener('online', () => {
-        // Browser thinks we're back online, reload the page
-        window.location.reload();
-    });
-
-    window.addEventListener('offline', () => {
-        // Handle offline logic if needed
-    });
-</script> -->
-      
+   
 
 </body>
 </html>

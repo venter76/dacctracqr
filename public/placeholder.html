@@ -20,21 +20,27 @@
 
     <script>
         function checkOnlineStatus() {
+            console.log('Checking online status...');
+    
             fetch('/checkOnline')
                 .then(response => {
+                    console.log('Received response:', response.status);
                     if (response.status === 200) {
-                        window.location.href = '/';  // Redirect to the home page
+                        console.log('Redirecting to home page...');
+                        window.location.href = '/';
+                    } else {
+                        console.log('Response status is not 200:', response.status);
                     }
                 })
                 .catch(error => {
-                    // Fetch failed, probably due to being offline. No action needed.
+                    console.log('Fetch failed:', error.message);
                 });
         }
-
+    
         // Call the function every 5 seconds
-        setInterval(checkOnlineStatus, 1000);
+        setInterval(checkOnlineStatus, 5000); // Note: I changed this to 5000 for every 5 seconds
     </script>
-   
+    
 
 </body>
 </html>

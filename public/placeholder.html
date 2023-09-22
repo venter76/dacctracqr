@@ -16,9 +16,27 @@
     </style>
 </head>
 <body>
-    <h3>"Finding your equipment ..."</h3>
+    <h3 id="loadingText">Finding your equipment ...</h3>
 
     <script>
+
+
+        let dots = 0;
+        const maxDots = 3;
+        const loadingTextElement = document.getElementById('loadingText');
+
+        function updateDots() {
+            let dotsStr = '';
+            for (let i = 0; i < dots; i++) {
+                dotsStr += '.';
+            }
+            loadingTextElement.textContent = `Finding your equipment ${dotsStr}`;
+            dots = (dots + 1) % (maxDots + 1);
+        }
+
+
+
+
         function checkOnlineStatus() {
             console.log('Checking online status...');
     

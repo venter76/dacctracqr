@@ -55,8 +55,10 @@
                 });
         }
     
-        // Call the function every 5 seconds
-        setInterval(checkOnlineStatus, 1000); // Note: I changed this to 5000 for every 5 seconds
+        // Call the function every 1 seconds
+        setInterval(checkOnlineStatus, 1000); 
+     // Call the updateDots function every second to update the dots animation
+     setInterval(updateDots, 1000);
     </script>
     
 

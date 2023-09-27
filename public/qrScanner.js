@@ -27,6 +27,13 @@ function startQRScanning() {
         
         if (code) {
           console.log("Found QR code:", code.data);
+
+// Stopping the video stream before redirecting.
+if (video.srcObject) {
+  let tracks = video.srcObject.getTracks();
+  tracks.forEach(track => track.stop());
+}
+
           window.location.href = `/detail?itemName=${code.data}`;
           // More code ....
         }

@@ -8,89 +8,54 @@
 
     <title>Index</title>
 
-
     <style>
-    ul {
-      list-style: none;
-  }
-  
+      ul {
+        list-style: none;
+      }
+    
+      
   .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
   }
-  
+
   .myLink {
-      color: black;
-      text-decoration: none;
-  }
-  
-  #cameraModal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-  }
-  
-  .modal-content {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      width: 80%;
-      max-width: 600px; /* Setting a maximum width */
-  }
-  
-  .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-  }
-  
-  .close:hover, .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-  }
-  
-  #loading-container {
-      display: none;
-      text-align: center;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: white;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-  }
-  
-  .spinner {
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-top: 4px solid #3498db;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto;
-  }
-  
-  @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-  }
-  
-  #video {
-      width: 100%;
-      height: auto;
-  }
-</style>  
+    color: black;
+    text-decoration: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+.modal-content {
+  background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    background-color: #fff;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+</style>
   
  
 
@@ -151,23 +116,14 @@
       </div>
     </div>
     <br>
-    <div id="cameraModal" style="display: none;">
-      <div id="loading-container">Loading...</div>
-      <video id="video" style="display: none;"></video>
-      <button class="close">Close</button>
-  </div>
-  
+
 <!-- Add this somewhere in your HTML -->
-<!-- <div id="cameraModal" class="modal">
+<div id="cameraModal" class="modal">
   <div class="modal-content">
       <span class="close">&times;</span>
       <video id="video" playsinline></video>
   </div>
 </div>
-<div id="loading-container">
-  You can place a loading message or spinner graphic here -->
-  <!-- Loading...
-</div> -->
 
  
 <br>
@@ -208,7 +164,7 @@
 
 
   
-  setInterval(reloadHomePage, 30000);
+  setInterval(reloadHomePage, 15000);
 </script>
 
     <script src="index.js"></script>
@@ -228,85 +184,36 @@
         
         <script src="https://cdn.jsdelivr.net/npm/jsqr@1.3.1/dist/jsQR.js"></script>
 
+        <script src="/qrScanner.js"></script>
+
+
         <script>
-          // Function to start QR code scanning
-          function startQRScanning() {
-            console.log("startQRScanning function entered");
-              let video = document.getElementById("video");
-              let loadingContainer = document.getElementById("loading-container");
-              let modal = document.getElementById("cameraModal");
-          
-              // Hide the video and modal initially
-              modal.style.display = "none";
-          
-              navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-                  .then(function(stream) {
-                      video.srcObject = stream;
-                      video.setAttribute("playsinline", true);
-                      video.onloadedmetadata = function() {
-    video.play();
-                      };
-          
-                      requestAnimationFrame(tick);
-          
-                      function tick() {
-                          if (video.readyState === video.HAVE_ENOUGH_DATA) {
-                              // QR code scanning logic
-                              let canvas = document.createElement("canvas");
-                              canvas.width = video.videoWidth;
-                              canvas.height = video.videoHeight;
-                              let ctx = canvas.getContext("2d");
-                              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          
-                              let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                              let code = jsQR(imageData.data, imageData.width, imageData.height, {
-                                  inversionAttempts: "dontInvert",
-                              });
-          
-                              if (code) {
-                                  console.log("Found QR code:", code.data);
-                                  window.location.href = `/detail?itemName=${code.data}`;
-                                  // Once QR code is found, stop the video stream
-                                  if (video.srcObject) {
-                                      video.srcObject.getTracks().forEach(track => track.stop());
-                                  }
-                              }
-          
-                              // QR code found, hide loading container and show video
-                              loadingContainer.style.display = "none";
-                              video.style.display = "block";
-                              modal.style.display = "none"; // Hide the modal as well if needed
-                          } else {
-                              // If data is not enough, keep ticking
-                              requestAnimationFrame(tick);
-                          }
-                      }
-                  })
-                  .catch(function(err) {
-                      console.error("Error accessing camera:", err);
-                      alert("Error accessing camera: " + err.message);
-                  });
-          }
-          
-          // Event listener to trigger QR code scanning when the "startScan" button is clicked
-          document.getElementById("startScan").addEventListener("click", function() {
-            console.log("startScan button clicked");
-            
-            // Show the modal and loading container when scanning starts
-              document.getElementById("cameraModal").style.display = "block";
-              document.getElementById("loading-container").style.display = "block";
-              startQRScanning();
-          });
-          
-          // Event listener to close the modal when the close button is clicked
-          document.querySelector(".close").addEventListener("click", function() {
-              document.getElementById("cameraModal").style.display = "none";
-          });
-      </script>
+          var modal = document.getElementById("cameraModal");
+          var btn = document.getElementById("startScan");
+          var span = document.getElementsByClassName("close")[0];
       
-        
-        
-        
+          btn.onclick = function() {
+              modal.style.display = "block";
+              // Assuming startQRScanning is your function in qrScanner.js that initiates the QR scanning
+              startQRScanning();
+          }
+      
+          span.onclick = function() {
+              modal.style.display = "none";
+              // Optionally, stop your QR scanning code here, if you have a function to do that.
+              // For example: stopQRScanning();
+          }
+      
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+                  // Optionally, stop your QR scanning code here.
+                  // For example: stopQRScanning();
+              }
+          }
+      </script>
+     
+
 </body>
 
 <footer class="sticky-footer bg-light">
